@@ -8,7 +8,7 @@ In this code-along lesson, we'll cover nested forms that can create multiple obj
 
 1. Create models for each class of objects
 2. Structure data in a controller action will receive to handle multiple objects
-3. Structure the HTML in .erb files that handles nesting
+3. Structure the HTML in .erb files that handle nesting
 4. Create a view file that displays the objects back to the user
 5. Create two controller actions that serve up the form and processes the data from the form
 
@@ -145,12 +145,12 @@ Let's think about how we'd build this hash using Ruby:
 
 ```ruby
 my_hash["student"] = {}
-my_hash["student["name"] = "Joe"
-myhash["student"]["course"] = {}
-myhash["student"]["course"]["name"] => "US History"
-myhash["student"]["course"]["course"] => "History"
+my_hash["student"]["name"] = "Joe"
+my_hash["student"]["course"] = {}
+my_hash["student"]["course"]["name"] = "US History"
+my_hash["student"]["course"]["topic"] = "History"
 ```
-Again, we can use the ERB syntax to set up our form. We can ignore the first level of nesting, the `my_hash` portion, and just dive straight into student and course, turning `my_hash["student"]["course"]["name"] => "US History"` into `["student"]["course"]["name"]`.
+Again, we can use the ERB syntax to set up our form. We can ignore the first level of nesting, the `my_hash` portion, and just dive straight into student and course, turning `my_hash["student"]["course"]["name"]` into `student["course"]["name"]`.
 
 Let's go ahead and build out the corresponding HTML for the form:
 
@@ -214,9 +214,9 @@ This is where ERB syntax differs from Ruby. In Ruby, if you wanted a hash to sto
 ```ruby
 my_hash["student"] = {}
 my_hash["student["name"] = "Joe"
-myhash["student"]["course"] = []
-myhash["student"]["course"][0] = { "name" => "US History", "topic" => "History"}
-myhash["student"]["course"][1] = { "name" => "AP Human Geography", "topic" => "History"}
+my_hash["student"]["course"] = []
+my_hash["student"]["course"][0] = { "name" => "US History", "topic" => "History"}
+my_hash["student"]["course"][1] = { "name" => "AP Human Geography", "topic" => "History"}
 ```
 
 To access the first course's name, you would do something like:
